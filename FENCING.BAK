@@ -1,0 +1,153 @@
+//Find Amount for Fencing
+#include<iostream.h>
+#include<conio.h>
+ int choice;
+ class Shape
+ {
+   public:
+	 Shape();
+	 void getdata();
+	 void rect_display();
+	 void rect_area();
+	 int rect_perimeter();
+	 void square_area();
+	 int square_perimeter();
+	 void square_display();
+	 ~Shape();
+  protected:
+	 int l,b,a,area,perim;
+ };
+
+ Shape::Shape()
+ {
+   l=0;
+   b=0;
+   a=0;
+ }
+ void Shape::getdata()
+ {
+  if(choice==1)
+  {
+  cout<<"\n Enter the side of Square :";cin>>a;
+  }
+  else
+  {
+  cout<<"\n Enter the length of Rectangle:";
+  cin>>l;
+  cout<<"\n Enter the width of Rectangle:";
+  cin>>b;
+  }
+ }
+ void Shape::rect_area()
+ {
+   area=l*b;
+ }
+ int Shape::rect_perimeter()
+ {
+  perim=(2*(l+b));
+  return perim;
+ }
+ void Shape::square_area()
+  {
+   area=a*a;
+ }
+ int Shape::square_perimeter()
+ {
+  perim=4*a;
+  return perim;
+ }
+ void Shape::rect_display()
+ {
+  cout<<"\n Area      ("<<l<<"*"<<b<<")="<<area;
+  cout<<"\n Perimeter 2("<<l<<"+"<<b<<")="<<perim;
+ }
+ void Shape::square_display()
+ {
+ cout<<"\n Area      ("<<a<<"^2)="<<area;
+ cout<<"\n Perimeter (4*"<<a<<")="<<perim;
+ }
+ class Fencing
+ {
+  public:
+       Fencing();
+       int getcost();
+       ~Fencing();
+  protected:
+       int cost;
+ };
+
+ Fencing::Fencing()
+ {
+ }
+ int Fencing::getcost()
+ {
+   cout<<"\n Enter the amount per square feet :";
+   cin>>cost;
+   return cost;
+ }
+ Fencing::~Fencing()
+ {
+ }
+
+ class derived : public Shape,public Fencing
+ {
+   public:
+	 derived();
+	 void calculate();
+	 void display1();
+	 ~derived();
+   private:
+	 int total;
+ };
+ derived::derived()
+ {
+ total=0;
+ }
+ void derived::calculate()
+ {
+  total=perim*cost;
+ }
+ void derived::display1()
+ {
+ cout<<"\n Total cost ="<<total;
+ }
+ Shape::~Shape()
+ {
+ }
+ derived::~derived()
+ {
+ }
+
+ int main()
+ {
+  derived s1;
+  clrscr();
+  cout<<"\n *************************************************************************";
+  cout<<"\n\n                        FENCING AND COST CALCULATION  \n\n";
+  cout<<"\n **************************************************************************\n\n";
+  cout<<"\n Enter your choice 1-Square,2-Rectangle ";cin>>choice;
+  if(choice==1)
+  {
+  s1.getdata();
+  s1.square_area();
+  s1.square_perimeter();
+  s1.getcost();
+  s1.calculate();
+  s1.square_display();
+  cout<<"\n -------------------------------------------------------------";
+  s1.display1();
+  }
+  else
+  {
+  s1.getdata();
+  s1.rect_area();
+  s1.rect_perimeter();
+  s1.getcost();
+  s1.calculate();
+  s1.rect_display();
+  cout<<"\n -------------------------------------------------------------";
+  s1.display1();
+  }
+  getch();
+  return 0;
+  }
