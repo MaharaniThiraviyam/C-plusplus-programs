@@ -1,0 +1,141 @@
+//Addition and subtraction of time 
+
+#include<iostream.h>
+#include<conio.h>
+ class Time
+ {
+  public:
+	Time();
+	Time(int,int,int);
+	Time add(Time,Time);
+	Time sub(Time,Time);
+	void display();
+  private:
+	int h,m,s;
+ };
+ Time::Time()
+ {
+  h=0;
+  m=0;
+  s=0;
+ }
+ Time::Time(int hour,int min,int sec)
+ {
+  h=hour;
+  m=min;
+  s=sec;
+ }
+ Time Time::add(Time t1,Time t2)
+ {
+  Time t3;int temp=0;
+  t3.s=t1.s+t2.s;
+  if(t3.s>=60)
+  {
+   temp=t3.s/60;
+   t3.s=t3.s%60;
+  }
+  t3.m=t1.m+t2.m+temp;
+  temp=0;
+  if(t3.m>=60)
+  {
+   temp=t3.m/60;
+   t3.m=t3.m%60;
+  }
+  t3.h=t1.h+t2.h+temp;
+  temp=0;
+  if(t3.h>=60)
+  {
+   temp=t3.h/60;
+   t3.h=t3.h%60;
+  }
+  return t3;
+ }
+ Time Time::sub(Time t1,Time t2)
+ {
+  Time t3;
+  t3.s=t1.s-t2.s;
+  if(t3.s<0)
+  {
+   t1.s+=60;
+   t3.s=t1.s-t2.s;
+   t1.m--;
+  }
+  t3.m=t1.m-t2.m;
+  if(t3.m<0)
+  {
+   t1.m+=60;
+   t3.m=t1.m-t2.m;
+   t1.h--;
+  }
+  t3.h=t1.h-t2.h;
+  if(t3.h<0)
+  {
+  cout<<"hour="<<t3.h;
+  cout<<"\n In subraction, Hour value is less than 0. INVALID input.\n So hour value is automatically taken as 0. \n ";
+  t3.h=0;
+  }
+  return t3;
+ }
+
+ void Time::display()
+ {
+   if(h<10)
+   cout<<"0"<<h<<":";
+   else
+   cout<<h<<":";
+   if(m<10)
+   cout<<"0"<<m<<":";
+   else
+   cout<<m<<":";
+   if(s<10)
+   cout<<"0"<<s;
+   else
+   cout<<s;
+  }
+  int main()
+  {
+   int h1,m1,s1;
+   clrscr();
+   cout<<"\n Enter the hour:";cin>>h1;
+   while(h1>24)
+   {
+    cout<<"\n Hour value shouldbe less than 24.\n Re-enter the hour:";
+    cin>>h1;
+   }
+   cout<<"\n Enter the minutes:";cin>>m1;
+   while(m1>60)
+   {
+    cout<<"\n Minutes value shouldbe less than 60.\n Re-enter the minutes:";
+    cin>>m1;
+   }
+   cout<<"\n Enter the seconds:";cin>>s1;
+   while(s1>60)
+   {
+    cout<<"\n Seconds value shouldbe less than 60.\n Re-enter the seconds:";
+    cin>>s1;
+   }
+   Time time1(h1,m1,s1); //CALL PARAMETERIZED CONSTRUCTOR
+   cout<<"\n Enter the hour:";cin>>h1;
+   cout<<"\n Enter the minute:";cin>>m1;
+   cout<<"\n Enter the second:";cin>>s1;
+   cout<<"\n======================================================";
+   Time time2(h1,m1,s1); //CALL PARAMETERIZED CONSTRUCTOR
+   Time time3; //CALL EMPTY CONSTRUCTOR
+   time3=time3.add(time1,time2);
+   Time time4;
+   clrscr();
+   cout<<"\n\n Addition :\n\n ";
+   time1.display();cout<<" +\n ";
+   time2.display();cout<<"\n ---------\n ";
+   time3.display();
+   cout<<"\n=====================================================";
+   cout<<"\n\n Subtraction :\n\n ";
+   time4=time4.sub(time1,time2);
+   time1.display();cout<<" -\n ";
+   time2.display();cout<<"\n ---------\n ";
+   time4.display();
+   getch();
+   return 0;
+   }
+
+
