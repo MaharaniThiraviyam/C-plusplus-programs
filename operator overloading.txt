@@ -1,0 +1,233 @@
+//Calculator using operator overloading
+#include<iostream.h>
+#include<conio.h>
+ class Calculator
+ {
+   public:
+	 Calculator();
+	 void getdata();
+	 Calculator operator+(Calculator);
+	 Calculator operator-(Calculator);
+	 Calculator operator*(Calculator);
+	 Calculator operator/(Calculator);
+	 Calculator operator%(Calculator);
+	 void display();
+	 ~Calculator();
+  private:
+	  int num;
+ };
+
+ Calculator::Calculator()
+ {
+  num=0;
+ }
+
+ void Calculator::getdata()
+ {
+  cout<<"\n Enter Number        :";cin>>num;
+ }
+
+ Calculator Calculator::operator+(Calculator c1)
+ {
+   Calculator c3;
+   c3.num=num+c1.num;
+   return c3;
+ }
+
+ Calculator Calculator::operator-(Calculator c1)
+ {
+   Calculator c3;
+   c3.num=num-c1.num;
+   return c3;
+ }
+
+ Calculator Calculator::operator*(Calculator c1)
+ {
+   Calculator c3;
+   c3.num=num*c1.num;
+   return c3;
+ }
+
+ Calculator Calculator::operator/(Calculator c1)
+ {
+   Calculator c3;
+   while(c1.num==0)
+   {
+   cout<<"\n SORRY !!! ERROR ... CANNOT DIVIDE BY ZERO ";
+   cout<<"\n Re-Enter the number :";cin>>c1.num;
+   }
+   c3.num=num/c1.num;
+   return c3;
+ }
+
+ Calculator Calculator::operator%(Calculator c1)
+ {
+   Calculator c3;
+   c3.num=num%c1.num;
+   return c3;
+ }
+
+ void Calculator::display()
+ {
+  cout<<"\n   "<<num;
+ }
+
+ Calculator::~Calculator()
+ {
+ }
+
+ int main()
+ {
+  Calculator cal1,cal2,cal3;
+  char operation;int choose;
+  do
+  {
+  clrscr();
+  cout<<"\n *************************************************************************** \n\n                            SIMPLE CALCULATOR\n\n ****************************************************************************";
+  cout<<"\n\n  1       2        3       +\n  4       5        6       -\n  7       8        9       *\n  0       %        /       =";
+  cout<<"\n\n ===========================================================================";
+
+  cal1.getdata();
+  cout<<"\n Enter the  opertion :";cin>>operation;
+  cal2.getdata();
+  switch(operation)
+  {
+   case '+':cal3=cal1+cal2;break;
+   case '-':cal3=cal1-cal2;break;
+   case '*':cal3=cal1*cal2;break;
+   case '/':cal3=cal1/cal2;break;
+   case '%':cal3=cal1%cal2;break;
+  }
+  clrscr();
+  cout<<"\n *************************************************************************** \n\n                            RESULT WINDOW \n\n ****************************************************************************";
+
+  cal1.display();cout<<"\n         "<<operation;
+  cal2.display();cout<<"\n -------";
+  cal3.display();cout<<"\n -------";
+  cout<<"\n __________________________________________________________________________";
+  cout<<"\n Do you want to continue (1-Yes,2-No)";cin>>choose;
+  }while(choose==1);
+  getch();
+  return 0;
+ }
+
+
+
+
+PROGRAM 2:UNARY OPERATOR
+
+#include<iostream.h>
+#include<conio.h>
+
+  class Website
+  {
+    public:
+	   Website();
+	   Website operator++();
+	   Website operator--();
+	   void display();
+	   ~Website();
+   private:
+	   int visitors,returners;
+   };
+
+   Website::Website()
+   {
+     visitors=0;
+     returners=0;
+   }
+
+   Website Website::operator++()
+   {
+    Website ag;
+    ag.visitors=++visitors;
+    return ag;
+   }
+
+   Website Website::operator--()
+   {
+    Website ag;
+    ag.visitors=--visitors;
+    ag.returners=returners+1;
+    if(ag.visitors<=0)
+    {
+    ag.visitors=0;
+    ag.returners=0;
+    }
+    return ag;
+   }
+
+   void Website::display()
+   {
+    cout<<"\n Visitors         :"<<visitors;
+    cout<<"\n Returners        :"<<returners;
+   }
+
+   Website::~Website()
+   {
+   }
+
+   int main()
+   {
+    Website a1,a2;
+    int choice,choose;
+    do
+    {
+    clrscr();
+    cout<<"\n Welcome to ONLINE CODE PRACTICE WEBSITE... (1-login (visit),2-logout(return) :";cin>>choice;
+    switch(choice)
+    {
+     case 1:a2=++a1;break;
+     case 2:a2=--a1;break;
+    }
+    a2.display();
+
+    cout<<"\n Do you want to continue (1-yes ,2- No):";cin>>choose;
+   }while(choose==1);
+    getch();
+    return 0;
+    }
+
+
+
+
+
+PROGRAM 3:
+#include<iostream.h>
+#include<conio.h>
+ 
+class Complex
+{
+private:
+    int real, imag;
+public:
+    Complex(int r = 0, int i =0)
+    {  real = r;   imag = i; }
+    friend ostream & operator << (ostream &out, const Complex &c);
+    friend istream & operator >> (istream &in,  Complex &c);
+};
+ 
+ostream & operator << (ostream &out, const Complex &c)
+{
+    out << c.real;
+    out << "+i" << c.imag << endl;
+    return out;
+}
+ 
+istream & operator >> (istream &in,  Complex &c)
+{
+    cout << "Enter Real Part ";
+    in >> c.real;
+    cout << "Enter Imagenory Part ";
+    in >> c.imag;
+    return in;
+}
+ 
+int main()
+{
+   Complex c1;
+   cin >> c1;
+   cout << "The complex object is ";
+   cout << c1;
+   return 0;
+}
